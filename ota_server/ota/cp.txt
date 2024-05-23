@@ -1,0 +1,4 @@
+g++ -o httpget httpclient.cpp -I/Users/yli/Desktop/WorkCode/Test/ota_http/include /Users/yli/Desktop/WorkCode/Test/ota_http/lib/libcurl.a -lcurl -framework CoreFoundation -framework SystemConfiguration
+
+
+./configure --without-ssl --without-zlib --disable-shared --without-brotli --without-zstd --disable-ldap --without-libidn2 --prefix=/Users/yli/Desktop/mylib/
