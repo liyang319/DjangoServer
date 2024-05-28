@@ -17,7 +17,7 @@ def otacheck(request):
     data = {
         'status': 'success',
         'newVer': 'true',
-        'url': 'http://192.168.80.235:8000/ota/good.zip',
+        'url': 'http://192.168.80.235:8000/ota/ControlBox',
         'md5': 'aaaaaaaaaaaaaaaaa'
     }
     return JsonResponse(data)
