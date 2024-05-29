@@ -56,3 +56,17 @@ def otacheck(request):
         'md5': json_ota_data['md5']
     }
     return JsonResponse(data)
+
+
+# 文件上传处理函数
+def file_upload(request):
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+        file_name = uploaded_file.name
+        print('----filename-----' + (settings.UPLOAD_DIR + file_name))
+        with open(settings.UPLOAD_DIR + file_name, 'wb+') as destination:
+            for chunk in uploaded_file.chunks():
+                destination.write(chunk)
+        return JsonResponse({'message': 'File uploaded successfully'}, status=200)
+    else:
+        return JsonResponse({'error': 'No file provided'}, status=400)

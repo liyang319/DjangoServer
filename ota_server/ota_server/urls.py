@@ -20,8 +20,10 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+# from .views import upload_file
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('otacheck', views.otacheck, name='otacheck'),
+    path('upload', views.file_upload, name='file_upload'),
 ] + static(settings.OTA_URL, document_root=settings.OTA_ROOT)
