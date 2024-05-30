@@ -27,6 +27,7 @@ def get_ota_info():
         file_content = ''  # 文件不存在时返回提示信息
     return file_content
 
+
 def otacheck(request):
     # 处理请求的逻辑
     # print(request.body)  # 打印请求的原始数据
@@ -61,10 +62,18 @@ def otacheck(request):
 # 文件上传处理函数
 def file_upload(request):
     if request.method == 'POST' and request.FILES.get('file'):
+        # 每个设备号新建一个文件夹
+        device_sn = request.POST.get('deviceSN')
+        print('---device_sn---' + device_sn)
+        log_dir = settings.UPLOAD_DIR + device_sn;
+        if not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+
         uploaded_file = request.FILES['file']
         file_name = uploaded_file.name
-        print('----filename-----' + (settings.UPLOAD_DIR + file_name))
-        with open(settings.UPLOAD_DIR + file_name, 'wb+') as destination:
+        dest_name = settings.UPLOAD_DIR + device_sn + '/' + file_name
+        # print('----filename-----' + (settings.UPLOAD_DIR + device_sn + '/' + file_name))
+        with open(dest_name, 'wb+') as destination:
             for chunk in uploaded_file.chunks():
                 destination.write(chunk)
         return JsonResponse({'message': 'File uploaded successfully'}, status=200)
