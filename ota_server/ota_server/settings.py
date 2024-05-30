@@ -128,4 +128,5 @@ OTA_URL = '/ota/'
 OTA_ROOT = os.path.join(BASE_DIR, 'ota')
 # 设置上传文件存放的路径
 UPLOAD_DIR = os.path.join(BASE_DIR, 'uploads/')
+LOG_CONFIG_PATH = os.path.join(UPLOAD_DIR, 'config/')
 

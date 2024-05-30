@@ -70,3 +70,29 @@ def file_upload(request):
         return JsonResponse({'message': 'File uploaded successfully'}, status=200)
     else:
         return JsonResponse({'error': 'No file provided'}, status=400)
+
+
+def device_log_check(request):
+    print(request.GET)  # 打印GET参数
+    device_sn = request.GET.get('sn')  # 获取GET参数
+    # device_sn = "4854604D7765A027"
+    with open(settings.LOG_CONFIG_PATH + 'device_log_config', 'r') as file:
+        json_data = json.load(file)
+    print(json_data)
+    log_status, log_date = get_log_status(json_data, device_sn)
+
+    data = {
+        'status': 'success',
+        'log': log_status,
+        'date': log_date,
+        'path': settings.UPLOAD_DIR
+    }
+    return JsonResponse(data)
+
+
+def get_log_status(data, sn):
+    for device in data['devices']:
+        if device['sn'] == sn:
+            return device['log'], device['date']
+    return "none", "none"
+

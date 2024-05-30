@@ -26,4 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('otacheck', views.otacheck, name='otacheck'),
     path('upload', views.file_upload, name='file_upload'),
+    path('logcheck', views.device_log_check, name='device_log_check'),
 ] + static(settings.OTA_URL, document_root=settings.OTA_ROOT)
