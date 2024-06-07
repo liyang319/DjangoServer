@@ -28,6 +28,13 @@ def get_ota_info():
     return file_content
 
 
+def get_ota_status(data, sn):
+    for device in data['devices']:
+        if device['sn'] == sn and device['ota'] == 'update':
+            return 'update'
+    return "none"
+
+
 def otacheck(request):
     # 处理请求的逻辑
     # print(request.body)  # 打印请求的原始数据
@@ -48,10 +55,12 @@ def otacheck(request):
     # hasNewVer = False;
     # if checkVer < 0:
     #     hasNewVer = True
+    aaa = get_ota_status(json_ota_data, sn)
+    print('------' + aaa)
 
     data = {
         'status': 'success',
-        'needUpdate': 'true' if checkVer < 0 else 'false',
+        'needUpdate': 'true' if checkVer < 0 and get_ota_status(json_ota_data, sn) == 'update' else 'false',
         'newVer': newVer,
         'url': json_ota_data['url'],
         'md5': json_ota_data['md5']
@@ -64,7 +73,7 @@ def file_upload(request):
     if request.method == 'POST' and request.FILES.get('file'):
         # 每个设备号新建一个文件夹
         device_sn = request.POST.get('deviceSN')
-        print('---device_sn---' + device_sn)
+        # print('---device_sn---' + device_sn)
         log_dir = settings.UPLOAD_DIR + device_sn;
         if not os.path.exists(log_dir):
             os.makedirs(log_dir)
