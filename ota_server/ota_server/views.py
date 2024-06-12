@@ -51,12 +51,17 @@ def otacheck(request):
     json_ota_data = json.loads(otaInfo)
 
     newVer = json_ota_data['version']
-    checkVer = compare_version(currentVer, newVer)
+    checkVer = -1
+    if currentVer == 'none':
+        checkVer = 0
+    else:
+        checkVer = compare_version(currentVer, newVer)
+    print('checkVer=' + str(checkVer))
     # hasNewVer = False;
     # if checkVer < 0:
     #     hasNewVer = True
-    aaa = get_ota_status(json_ota_data, sn)
-    print('------' + aaa)
+    # aaa = get_ota_status(json_ota_data, sn)
+    # print('------' + aaa)
 
     data = {
         'status': 'success',
