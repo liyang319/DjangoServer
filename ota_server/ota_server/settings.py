@@ -125,8 +125,18 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 OTA_URL = '/ota/'
-OTA_ROOT = os.path.join(BASE_DIR, 'ota')
+# OTA_ROOT = os.path.join(BASE_DIR, 'ota')
 # 设置上传文件存放的路径
-UPLOAD_DIR = os.path.join(BASE_DIR, 'uploads/')
-LOG_CONFIG_PATH = os.path.join(UPLOAD_DIR, 'config/')
+# UPLOAD_BASE_DIR = os.path.join(BASE_DIR, 'uploads/')
+# LOG_CONFIG_PATH = os.path.join(UPLOAD_BASE_DIR, 'config/')
 
+# UPLOAD_DIR = os.path.join(BASE_DIR, 'uploads/')
+# LOG_CONFIG_FILE_PATH = os.path.join(UPLOAD_DIR, 'config/', 'device_log_config')
+# OTA_ROOT = os.path.join(BASE_DIR, 'ota')
+# VERSION_INFO_CONFIG_FILE_PATH = os.path.join(OTA_ROOT, 'version_info')
+
+CONFIG_BASE = '/data/config/'
+UPLOAD_DIR = '/data/log/'
+LOG_CONFIG_FILE_PATH = os.path.join(CONFIG_BASE, 'device_log_config')
+OTA_ROOT = '/data/ota/'
+VERSION_INFO_CONFIG_FILE_PATH = os.path.join(CONFIG_BASE, 'version_info')

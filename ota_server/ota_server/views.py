@@ -17,9 +17,9 @@ def compare_version(version1, version2):
 
 def get_ota_info():
     # 读取服务器本地文件内容
-    file_name = 'version_info'
-    file_path = os.path.join(settings.OTA_ROOT, file_name)
-    print('-----filepath-----' + file_path)
+    # file_name = 'version_info'
+    file_path = settings.VERSION_INFO_CONFIG_FILE_PATH
+    print('-----filepath-----' + settings.VERSION_INFO_CONFIG_FILE_PATH)
     if os.path.exists(file_path):  # 判断文件是否存在
         with open(file_path, 'r') as file:  # 打开文件
             file_content = file.read()  # 读取文件内容
@@ -38,7 +38,7 @@ def get_ota_status(data, sn):
 def otacheck(request):
     # 处理请求的逻辑
     # print(request.body)  # 打印请求的原始数据
-    # print(request.GET)  # 打印GET参数
+    print(request.GET)  # 打印GET参数
 
     # 解析request中的参数
     cmd = request.GET.get('cmd')  # 获取GET参数
@@ -98,8 +98,7 @@ def file_upload(request):
 def device_log_check(request):
     print(request.GET)  # 打印GET参数
     device_sn = request.GET.get('sn')  # 获取GET参数
-    # device_sn = "4854604D7765A027"
-    with open(settings.LOG_CONFIG_PATH + 'device_log_config', 'r') as file:
+    with open(settings.LOG_CONFIG_FILE_PATH, 'r') as file:
         json_data = json.load(file)
     print(json_data)
     log_status, log_date = get_log_status(json_data, device_sn)
