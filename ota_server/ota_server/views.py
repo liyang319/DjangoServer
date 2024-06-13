@@ -30,9 +30,9 @@ def get_ota_info():
 
 def get_ota_status(data, sn):
     for device in data['devices']:
-        if device['sn'] == sn and device['ota'] == 'update':
-            return 'update'
-    return "none"
+        if device['sn'] == sn:
+            return device
+    return None
 
 
 def otacheck(request):
@@ -49,27 +49,33 @@ def otacheck(request):
     otaInfo = get_ota_info()
     print('otaInfo = ' + otaInfo)
     json_ota_data = json.loads(otaInfo)
+    print('----------parse----------')
+    needUpdate = 'false'
+    newVer = 'none'
+    pkgUrl = 'none'
+    pkgMd5 = 'none'
 
-    newVer = json_ota_data['version']
-    checkVer = -1
-    if currentVer == 'none':
-        checkVer = 0
-    else:
-        checkVer = compare_version(currentVer, newVer)
-    print('checkVer=' + str(checkVer))
-    # hasNewVer = False;
-    # if checkVer < 0:
-    #     hasNewVer = True
-    # aaa = get_ota_status(json_ota_data, sn)
-    # print('------' + aaa)
+    deviceInfo = get_ota_status(json_ota_data, sn)
+    if deviceInfo is not None:
+        newVer = deviceInfo['version']
+        checkVer = -1
+        if currentVer == 'none':
+            checkVer = 0
+        else:
+            checkVer = compare_version(currentVer, newVer)
+        print('checkVer=' + str(checkVer))
+        needUpdate = 'true' if checkVer < 0 and deviceInfo['ota'] == 'update' else 'false'
+        pkgUrl = deviceInfo['url']
+        pkgMd5 = deviceInfo['md5']
 
     data = {
         'status': 'success',
-        'needUpdate': 'true' if checkVer < 0 and get_ota_status(json_ota_data, sn) == 'update' else 'false',
+        'needUpdate': needUpdate,
         'newVer': newVer,
-        'url': json_ota_data['url'],
-        'md5': json_ota_data['md5']
+        'url': pkgUrl,
+        'md5': pkgMd5
     }
+    print(data)
     return JsonResponse(data)
 
 

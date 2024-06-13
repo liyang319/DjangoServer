@@ -1,19 +1,23 @@
 {
-    "version": "2.0.1",
-    "url": "http://192.168.80.235:8000/ota/ControlBox_2.0.1.zip",
-    "md5": "cbbde909ee7eb3fc7b42263ea6ed49f9",
-    "devices": [
-        {
-            "sn": "4854604D7765A027",
-            "ota": "update"
-        },
-        {
-            "sn": "4854604D7765A028",
-            "ota": "none"
-        },
-        {
-            "sn": "4854604D7765A029",
-            "ota": "update"
-        }
-    ]
+	"devices": [{
+		"sn": "4854604D7765A027",
+		"ota": "update",
+		"version": "1.0.1",
+		"url": "http://192.168.80.235:8901/ota/ControlBox_2.0.1.zip",
+		"md5": "cbbde909ee7eb3fc7b42263ea6ed49f9"
+	},
+	{
+		"sn": "4854604D7765A028",
+		"ota": "none",
+		"version": "2.0.1",
+		"url": "http://192.168.80.235:8901/ota/ControlBox_2.0.1.zip",
+		"md5": "cbbde909ee7eb3fc7b42263ea6ed49f9"
+	},
+	{
+		"sn": "4854604D7765A029",
+		"ota": "update",
+		"version": "2.0.1",
+		"url": "http://192.168.80.235:8901/ota/ControlBox_2.0.1.zip",
+		"md5": "cbbde909ee7eb3fc7b42263ea6ed49f9"
+	}]
 }
