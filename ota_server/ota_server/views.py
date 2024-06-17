@@ -3,6 +3,34 @@ from django.conf import settings
 import os
 import json
 
+import logging
+import sys
+
+
+# 指定日志文件路径
+log_file_path = settings.SERVER_LOG_PATH
+
+# 配置logging，设置日志文件路径
+logging.basicConfig(filename=log_file_path, level=logging.DEBUG)
+
+
+# 重定向print输出到日志文件
+class LoggerWriter:
+    def __init__(self, level):
+        self.level = level
+
+    def write(self, message):
+        if message != '\n':
+            self.level(message)
+
+    def flush(self):
+        self.level(sys.stderr)
+
+
+# 替换sys.stdout和sys.stderr
+sys.stdout = LoggerWriter(logging.info)
+sys.stderr = LoggerWriter(logging.warning)
+
 
 def compare_version(version1, version2):
     v1 = list(map(int, version1.split('.')))

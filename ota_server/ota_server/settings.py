@@ -124,6 +124,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# 设置文件上传的最大内存大小为100MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 104857600  # 100 MB
+
+# 设置数据上传的最大内存大小为100MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 104857600  # 100 MB
+
+
 OTA_URL = '/ota/'
 # OTA_ROOT = os.path.join(BASE_DIR, 'ota')
 # 设置上传文件存放的路径
@@ -134,9 +141,11 @@ OTA_URL = '/ota/'
 # LOG_CONFIG_FILE_PATH = os.path.join(UPLOAD_DIR, 'config/', 'device_log_config')
 # OTA_ROOT = os.path.join(BASE_DIR, 'ota')
 # VERSION_INFO_CONFIG_FILE_PATH = os.path.join(OTA_ROOT, 'version_info')
+# SERVER_LOG_PATH = os.path.join(OTA_ROOT, 'server.log')
 
 CONFIG_BASE = '/data/config/'
 UPLOAD_DIR = '/data/log/'
 LOG_CONFIG_FILE_PATH = os.path.join(CONFIG_BASE, 'device_log_config')
 OTA_ROOT = '/data/ota/'
 VERSION_INFO_CONFIG_FILE_PATH = os.path.join(CONFIG_BASE, 'version_info')
+SERVER_LOG_PATH = os.path.join(UPLOAD_DIR, 'server.log')
